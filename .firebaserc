@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "equipment-audit-d939d": {
+      "hosting": {
+        "equipment-audit": [
+          "equipment-audit-d939d"
+        ]
+      }
+    }
+  }
+}
