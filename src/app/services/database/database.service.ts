@@ -37,7 +37,6 @@ export class DatabaseService {
   }
 
   getRole(id: string) {
-    // const temp = 'z7oefAqBb2K7V7OmpLtM';
     this.db.doc<Role>(`roles/${id}`).valueChanges()
       .pipe(take(1))
       .subscribe(val => console.log(val));;
