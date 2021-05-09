@@ -3,6 +3,11 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import firebase from 'firebase/app';
+import { Office } from 'src/app/shared/model/office';
+import { Role } from 'src/app/shared/model/role';
+import { Equipment } from 'src/app/shared/model/equipment';
+import { User } from 'src/app/shared/model/user';
+
 
 @Injectable({
   providedIn: 'root'
@@ -47,7 +52,7 @@ export class DatabaseService {
   }
 
   updateRole(id: string, updates: object) {
-    const { name } = updates;
+    const name  = updates;
     const now = firebase.firestore.FieldValue.serverTimestamp();
     // console.log(updates, name);
     if (typeof name === 'string') {

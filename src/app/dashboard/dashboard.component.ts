@@ -10,7 +10,7 @@ export class DashboardComponent implements AfterViewInit {
     this.subtitle = 'This is some text within a card block.';
   }
 
-  testingService(name) {
+  testingService(name: any) {
     // const id = 'oWemurXW2Wc3iLaDdCvR';
     // this.dbServ.addRole(name);
     // this.dbServ.deleteRole(id);
