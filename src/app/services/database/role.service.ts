@@ -5,6 +5,7 @@ import { map, take } from 'rxjs/operators';
 import firebase from 'firebase/app';
 
 interface Role {
+  id: string,
   name: string,
   created_at: any,
   updated_at: any
@@ -14,27 +15,20 @@ interface Role {
   providedIn: 'root'
 })
 
-export class DatabaseService {
+export class RoleService {
   private rolesCollection: AngularFirestoreCollection<Role>;
 
   roles: Observable<Role[]>;
-  // offices: Observable<Office[]>;
-  // users: Observable<User[]>;
-  // equipment: Observable<Equipment[]>;
 
   constructor(private readonly db: AngularFirestore) {
-    // this.equipment = db.collection('equipment').valueChanges();
-    // this.users = db.collection('users').valueChanges();
-    // this.offices = db.collection('offices').valueChanges();
-
     this.rolesCollection = db.collection<Role>('roles');
-    this.roles = this.rolesCollection.valueChanges();
+    this.roles = this.rolesCollection.valueChanges({ idField: 'id' });
   }
 
   addRole(name: string) {
     const id = this.db.createId();
     const now = firebase.firestore.FieldValue.serverTimestamp();
-    const role: Role = { name, created_at: now, updated_at: now };
+    const role: Role = { id, name, created_at: now, updated_at: now };
     this.rolesCollection.doc(id).set(role);
   }
 
@@ -43,7 +37,7 @@ export class DatabaseService {
   }
 
   getRole(id: string) {
-    this.db.doc<Role>(`roles/${id}`).valueChanges()
+    this.db.doc<Role>(`roles/${id}`).valueChanges({ idField: 'id' })
       .pipe(take(1))
       .subscribe(val => console.log(val));;
   }

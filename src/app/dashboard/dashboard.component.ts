@@ -1,22 +1,22 @@
 import { Component, AfterViewInit } from '@angular/core';
-import { DatabaseService } from '../services/database/database.service';
+import { RoleService } from '../services/database/role.service';
 
 @Component({
   templateUrl: './dashboard.component.html'
 })
 export class DashboardComponent implements AfterViewInit {
   subtitle: string;
-  constructor(private dbServ: DatabaseService) {
+  constructor(private dbServ: RoleService) {
     this.subtitle = 'This is some text within a card block.';
   }
 
-  testingService(name) {
-    // const id = 'oWemurXW2Wc3iLaDdCvR';
+  testingService(name: string) {
+    // const id = 'Xf16qCOsJxKHI14EH4dH';
     // this.dbServ.addRole(name);
     // this.dbServ.deleteRole(id);
     // this.dbServ.getRole(id);
     this.dbServ.getAllRoles();
-    // this.dbServ.updateRole(id, { name: 'test' });
+    // this.dbServ.updateRole(id, { name });
   }
 
 
