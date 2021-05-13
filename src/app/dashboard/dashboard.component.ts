@@ -8,17 +8,17 @@ import { EquipmentService } from '../services/database/equipment.service';
 })
 export class DashboardComponent implements AfterViewInit {
   subtitle: string;
-  constructor(private dbServ: EquipmentService) {
+  constructor(private dbServ: OfficeService) {
     this.subtitle = 'This is some text within a card block.';
   }
 
   testingService() {
     const roleName = 'test';
-    const roleId = 'Xf16qCOsJxKHI14EH4dH';
+    const roleId = 'ApkmUPdjK0pNfoUNDf4V';
 
     const officeName = 'Tuitt Makati';
     const officeLocation = '399 Sen. Gil J. Puyat Ave, Makati, 1200 Metro Manila';
-    const officeId = 'BVlZcWLoB93Ts4EbyH2T';
+    const officeId = 'bzC8V5M7HjPX7DryAKb2';
     const officeRef = `/offices/${officeId}`;
 
     const equipmentName = 'bulldozer 3';
@@ -27,17 +27,39 @@ export class DashboardComponent implements AfterViewInit {
     const purchaseDate = 'December 10, 2019';
     const lastAuditedAt = 'April 5, 2021';
 
-    // this.dbServ.addRole(roleName);
+    // this.dbServ.addRole({
+    //     id: '',
+    //     name: roleName,
+    //     created_at: null,
+    //     updated_at: null
+    // });
     // this.dbServ.deleteRole(roleId);
-    // this.dbServ.getRole(id);
+    // this.dbServ.getRole(roleId);
     // this.dbServ.getAllRoles();
-    // this.dbServ.updateRole(roleId, { name });
+    // this.dbServ.updateRole(roleId, {
+    //     id: roleId,
+    //     name: roleName,
+    //     created_at: null,
+    //     updated_at: null
+    // });
 
-    // this.dbServ.addOffice(officeName, officeLocation);
+    // this.dbServ.addOffice({
+    //     id: '',
+    //     name: officeName,
+    //     location: officeLocation,
+    //     created_at: null,
+    //     updated_at: null
+    // });
     // this.dbServ.deleteOffice(officeId);
     // this.dbServ.getOffice(officeId);
     // this.dbServ.getAllOffices();
-    // this.dbServ.updateOffice(officeId, { name, officeLocation });
+    // this.dbServ.updateOffice(officeId, {
+    //     id: officeId,
+    //     name: officeName,
+    //     location: officeLocation,
+    //     created_at: null,
+    //     updated_at: null
+    // });
 
     // this.dbServ.addEquipment({
     //   id: '',

@@ -27,11 +27,18 @@ export class OfficeService {
     this.offices = this.officesCollection.valueChanges({ idField: 'id' });
   }
 
-  addOffice(name: string, location: string) {
-    const id = this.db.createId();
+  addOffice(office: Office) {
+    const newId = this.db.createId();
     const now = firebase.firestore.FieldValue.serverTimestamp();
-    const office: Office = { id, name, location, created_at: now, updated_at: now };
-    this.officesCollection.doc(id).set(office);
+
+    const validatedOffice = {
+      ...office,
+      id: newId,
+      created_at: now,
+      updated_at: now
+    }
+
+    this.officesCollection.doc(newId).set(validatedOffice);
   }
 
   deleteOffice(id: string) {
@@ -50,12 +57,24 @@ export class OfficeService {
     this.offices.pipe(take(1)).subscribe(val => console.log(val));
   }
 
-  updateOffice(id: string, updates: any) {
-    // console.log(updates);
-    const { name, location } = updates;
+  updateOffice(id: string, updates: Office) {
     const now = firebase.firestore.FieldValue.serverTimestamp();
-    if (typeof name === 'string' && typeof location === 'string') {
-      this.officesCollection.doc(id).update({ name, location, updated_at: now });
+
+    const validatedOffice = {
+      ...updates,
+      id,
+      updated_at: now
     }
+
+    delete validatedOffice.created_at;
+    console.log(validatedOffice);
+
+    this.officesCollection.doc(id).update(validatedOffice)
+      .then(() => {
+        console.log('Updated');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 }

@@ -25,11 +25,18 @@ export class RoleService {
     this.roles = this.rolesCollection.valueChanges({ idField: 'id' });
   }
 
-  addRole(name: string) {
-    const id = this.db.createId();
+  addRole(role: Role) {
+    const newId = this.db.createId();
     const now = firebase.firestore.FieldValue.serverTimestamp();
-    const role: Role = { id, name, created_at: now, updated_at: now };
-    this.rolesCollection.doc(id).set(role);
+
+    const validatedRole = {
+      ...role,
+      id: newId,
+      created_at: now,
+      updated_at: now
+    };
+
+    this.rolesCollection.doc(newId).set(validatedRole);
   }
 
   deleteRole(id: string) {
@@ -48,12 +55,24 @@ export class RoleService {
     this.roles.pipe(take(1)).subscribe(val => console.log(val));
   }
 
-  updateRole(id: string, updates: any) {
-    // console.log(updates, name);
-    const { name } = updates;
+  updateRole(id: string, updates: Role) {
     const now = firebase.firestore.FieldValue.serverTimestamp();
-    if (typeof name === 'string') {
-      this.rolesCollection.doc(id).update({ name, updated_at: now });
-    }
+
+    const validatedRole = {
+      ...updates,
+      id,
+      updated_at: now
+    };
+
+    delete validatedRole.created_at;
+    // console.log(validatedRole);
+
+    this.rolesCollection.doc(id).update(validatedRole)
+      .then(() => {
+        console.log('Updated');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 }
