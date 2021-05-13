@@ -47,9 +47,9 @@ export class RoleService {
   }
 
   updateRole(id: string, updates: any) {
+    // console.log(updates, name);
     const { name } = updates;
     const now = firebase.firestore.FieldValue.serverTimestamp();
-    // console.log(updates, name);
     if (typeof name === 'string') {
       this.rolesCollection.doc(id).update({ name, updated_at: now });
     }
