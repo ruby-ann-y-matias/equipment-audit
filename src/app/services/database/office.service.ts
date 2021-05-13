@@ -35,10 +35,12 @@ export class OfficeService {
   }
 
   deleteOffice(id: string) {
+    // if object not found, no error is thrown
     this.officesCollection.doc(id).delete();
   }
 
   getOffice(id: string) {
+    // if object not found, function param will just be console logged
     this.db.doc<Office>(`offices/${id}`).valueChanges({ idField: 'id' })
       .pipe(take(1))
       .subscribe(val => console.log(val));;

@@ -33,10 +33,12 @@ export class RoleService {
   }
 
   deleteRole(id: string) {
+    // if object not found, no error is thrown
     this.rolesCollection.doc(id).delete();
   }
 
   getRole(id: string) {
+    // if object not found, function param will just be console logged
     this.db.doc<Role>(`roles/${id}`).valueChanges({ idField: 'id' })
       .pipe(take(1))
       .subscribe(val => console.log(val));;
