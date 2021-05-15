@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import firebase from 'firebase/app';
 
-interface Equipment {
+export interface Equipment {
   id: string,
   name: string,
   specs: string,
@@ -27,7 +27,7 @@ export class EquipmentService {
 
   constructor(private readonly db: AngularFirestore) {
     this.equipmentCollection = db.collection<Equipment>('equipment');
-    this.equipment = this.equipmentCollection.valueChanges({ idField: 'id' });
+    this.equipment = this.equipmentCollection.valueChanges();
   }
 
   addEquipment(equipment: Equipment) {
@@ -58,15 +58,12 @@ export class EquipmentService {
     this.equipmentCollection.doc(id).delete();
   }
 
-  getEquipment(id: string) {
-    // if object not found, function param will just be console logged
-    this.db.doc<Equipment>(`equipment/${id}`).valueChanges({ idField: 'id' })
-      .pipe(take(1))
-      .subscribe(val => console.log(val));
+  findEquipmentByName(name: string) {
+    return this.db.collection('equipment', ref => ref.where('name', '==', name)).valueChanges();
   }
 
-  getAllEquipment() {
-    this.equipment.pipe(take(1)).subscribe(val => console.log(val));
+  getEquipmentById(id: string) {
+    return this.db.doc<Equipment>(`equipment/${id}`).valueChanges();
   }
 
   updateEquipment(id: string, updates: Equipment) {

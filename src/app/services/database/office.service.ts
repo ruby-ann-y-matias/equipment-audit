@@ -1,11 +1,10 @@
-
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import firebase from 'firebase/app';
 
-interface Office {
+export interface Office {
   id: string,
   name: string,
   location: string,
@@ -24,7 +23,7 @@ export class OfficeService {
 
   constructor(private readonly db: AngularFirestore) {
     this.officesCollection = db.collection<Office>('offices');
-    this.offices = this.officesCollection.valueChanges({ idField: 'id' });
+    this.offices = this.officesCollection.valueChanges();
   }
 
   addOffice(office: Office) {
@@ -46,15 +45,12 @@ export class OfficeService {
     this.officesCollection.doc(id).delete();
   }
 
-  getOffice(id: string) {
-    // if object not found, function param will just be console logged
-    this.db.doc<Office>(`offices/${id}`).valueChanges({ idField: 'id' })
-      .pipe(take(1))
-      .subscribe(val => console.log(val));;
+  findOfficeByName(name: string) {
+    return this.db.collection('offices', ref => ref.where('name', '==', name)).valueChanges();
   }
 
-  getAllOffices() {
-    this.offices.pipe(take(1)).subscribe(val => console.log(val));
+  getOfficeById(id: string) {
+    return this.db.doc<Office>(`offices/${id}`).valueChanges();
   }
 
   updateOffice(id: string, updates: Office) {

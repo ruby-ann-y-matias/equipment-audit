@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import firebase from 'firebase/app';
 
-interface Role {
+export interface Role {
   id: string,
   name: string,
   created_at: any,
@@ -22,7 +22,7 @@ export class RoleService {
 
   constructor(private readonly db: AngularFirestore) {
     this.rolesCollection = db.collection<Role>('roles');
-    this.roles = this.rolesCollection.valueChanges({ idField: 'id' });
+    this.roles = this.rolesCollection.valueChanges();
   }
 
   addRole(role: Role) {
@@ -44,15 +44,12 @@ export class RoleService {
     this.rolesCollection.doc(id).delete();
   }
 
-  getRole(id: string) {
-    // if object not found, function param will just be console logged
-    this.db.doc<Role>(`roles/${id}`).valueChanges({ idField: 'id' })
-      .pipe(take(1))
-      .subscribe(val => console.log(val));;
+  findRoleByName(name: string) {
+    return this.db.collection('roles', ref => ref.where('name', '==', name)).valueChanges();
   }
 
-  getAllRoles() {
-    this.roles.pipe(take(1)).subscribe(val => console.log(val));
+  getRoleById(id: string) {
+    return this.db.doc<Role>(`roles/${id}`).valueChanges({ idField: 'id' });
   }
 
   updateRole(id: string, updates: Role) {
