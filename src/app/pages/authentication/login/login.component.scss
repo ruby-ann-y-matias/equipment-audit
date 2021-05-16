@@ -1,0 +1,12 @@
+.login-container {
+    min-height: 100vh;
+    height: 100%;
+}
+
+
+input {
+    &.border-bottom-only {
+        border: none;
+        border-bottom: 1px solid;
+    }
+}

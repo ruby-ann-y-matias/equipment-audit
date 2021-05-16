@@ -109,6 +109,11 @@
     }
   },
   "defaultProject": "ng-adminpro",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  },
   "cli": {
     "analytics": false
   }
