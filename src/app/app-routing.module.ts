@@ -3,6 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { FullComponent } from './layouts/full/full.component';
 import { LoginComponent } from './pages/authentication/login/login.component';
+import { EquipmentsComponent } from './pages/equipments/equipments.component';
+import { OfficeComponent } from './pages/office/office.component';
+import { UsersComponent } from './pages/users/users.component';
 
 export const Approutes: Routes = [
   {
@@ -17,12 +20,28 @@ export const Approutes: Routes = [
       {
         path: 'component',
         loadChildren: () => import('./component/component.module').then(m => m.ComponentsModule)
-      }
+      },
+      {
+        path: 'login' , pathMatch: 'full' ,
+        component: LoginComponent
+      },
+      {
+        path: 'logout' , pathMatch: 'full' ,
+        component: LoginComponent
+      },
+      {
+        path: 'equipments' , pathMatch: 'full' ,
+        component: EquipmentsComponent
+      },
+      {
+        path: 'offices' , pathMatch: 'full' ,
+        component: OfficeComponent
+      },
+      {
+        path: 'users' , pathMatch: 'full' ,
+        component: UsersComponent
+      },
     ]
-  },
-  {
-    path: 'login' , pathMatch: 'full' ,
-    component: LoginComponent
   },
   {
     path: '**',

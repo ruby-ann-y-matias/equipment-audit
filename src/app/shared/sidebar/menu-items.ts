@@ -2,14 +2,6 @@ import { RouteInfo } from "./sidebar.metadata";
 
 export const ROUTES: RouteInfo[] = [
   {
-    path: "",
-    title: "Personal",
-    icon: "mdi mdi-dots-horizontal",
-    class: "nav-small-cap",
-    extralink: true,
-    submenu: [],
-  },
-  {
     path: "/dashboard",
     title: "Dashboard",
     icon: "mdi mdi-gauge",
@@ -18,11 +10,36 @@ export const ROUTES: RouteInfo[] = [
     submenu: [],
   },
   {
-    path: "",
-    title: "UI Components",
-    icon: "mdi mdi-dots-horizontal",
-    class: "nav-small-cap",
-    extralink: true,
+    path: "/equipments",
+    title: "Equipment",
+    icon: "fas fa-cogs",
+    class: "",
+    extralink: false,
     submenu: [],
-  }
+  },
+  {
+    path: "/offices",
+    title: "Offices",
+    icon: "fas fa-building",
+    class: "",
+    extralink: false,
+    submenu: [],
+  },
+  {
+    path: "/users",
+    title: "Users",
+    icon: "fas fa-users",
+    class: "",
+    extralink: false,
+    submenu: [],
+  },
+
+  {
+    path: "/logout",
+    title: "Logout",
+    icon: "fas fa-sign-out-alt",
+    class: "",
+    extralink: false,
+    submenu: [],
+  },
 ];
