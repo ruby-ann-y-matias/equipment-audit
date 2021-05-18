@@ -1,16 +1,40 @@
 <div class="container">
     <div class="row login-container justify-content-center align-items-center">
         <div class="col-12">
-            <div class="card mx-auto w-50">
+            <div class="card mx-auto w-50 p-5">
                 <div class="card-body ">
-                    <h5 class="card-title text-center">Log In</h5>
-                    <div class="login-form-container w-100">
+                    <h3 class="card-title text-center">Sign In</h3>
+                    <div class="login-form-container">
                         <form action="">
                             <div class="mb-3">
                                 <label for="username" class="form-label">Username</label>
-                                <input type="text" class="form-control " id="username" placeholder="name@example.com">
+                                <input type="text" class="form-control " id="username">
                             </div>
-                        </form>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control " id="password">
+                            </div>
+                            <div class="login-btn-container">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="" id="rememberLogin">
+                                    <label class="form-check-label" for="rememberLogin">Remember</label>
+                                  </div>
+                                  <div class="login-btn w-100 mt-3">
+                                      <button class="btn btn-primary w-100" type="submit">Login</button>
+                                  </div>
+                            </div>
+                        </form> 
+                        <div class="row text-center">
+                            <div class="col-12">
+                                <p class="my-2 font-weight-bold">OR</p>
+                                <div class="input-group mb-3 justify-content-center">
+                                    <div class="google-login-container d-flex">
+                                        <span class="input-group-text google-login-color google-login-color--darker" id="basic-addon1"><i class="fab fa-google"></i></span>
+                                        <button class="btn btn-google-login text-uppercase google-login-color w-100"  (click)="auth.googleSignIn()">Login with Google</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
               </div>
