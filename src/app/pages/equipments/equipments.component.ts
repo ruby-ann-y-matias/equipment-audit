@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { EquipmentService } from 'src/app/services/database/equipment.service';
 
 @Component({
@@ -9,10 +10,17 @@ import { EquipmentService } from 'src/app/services/database/equipment.service';
 export class EquipmentsComponent implements OnInit {
 
   constructor(
-    public equipmentService: EquipmentService
+    public equipmentService: EquipmentService,
+    public router : Router
     ) { }
 
   ngOnInit(): void {
   }
 
+
+
+
+  goToDetailedEquipmentPage(id: any){
+    this.router.navigate(['/equipments/'+id]);
+  }
 }

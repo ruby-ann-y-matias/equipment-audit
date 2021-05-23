@@ -34,6 +34,7 @@ import { PERSISTENCE } from '@angular/fire/auth';
 import { UsersComponent } from './pages/users/users.component';
 import { EquipmentsComponent } from './pages/equipments/equipments.component';
 import { OfficeComponent } from './pages/office/office.component';
+import { EquipmentDetailsComponent } from './pages/equipments/equipment-details/equipment-details.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -52,7 +53,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     BreadcrumbComponent,
     UsersComponent,
     EquipmentsComponent,
-    OfficeComponent
+    OfficeComponent,
+    EquipmentDetailsComponent
   ],
   imports: [
     AngularFirestoreModule,

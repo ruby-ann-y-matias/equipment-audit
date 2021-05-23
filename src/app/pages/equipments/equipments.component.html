@@ -14,7 +14,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let eq of equipmentService.equipment | async ">
+                    <tr *ngFor="let eq of equipmentService.equipment | async " (click)="goToDetailedEquipmentPage(eq.id)" class="cursor-pointer">
                         <td>{{eq.name}}</td>
                         <td>{{eq.purchase_date.toDate()  | date:'longDate'}}</td>
                         <td>{{eq.id}}</td>

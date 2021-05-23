@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { FullComponent } from './layouts/full/full.component';
 import { LoginComponent } from './pages/authentication/login/login.component';
+import { EquipmentDetailsComponent } from './pages/equipments/equipment-details/equipment-details.component';
 import { EquipmentsComponent } from './pages/equipments/equipments.component';
 import { OfficeComponent } from './pages/office/office.component';
 import { UsersComponent } from './pages/users/users.component';
@@ -32,6 +33,10 @@ export const Approutes: Routes = [
       {
         path: 'equipments' , pathMatch: 'full' ,
         component: EquipmentsComponent
+      },
+      {
+        path: 'equipments/:id' , pathMatch: 'full' ,
+        component: EquipmentDetailsComponent
       },
       {
         path: 'offices' , pathMatch: 'full' ,
