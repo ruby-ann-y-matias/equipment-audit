@@ -1,61 +1,19 @@
+
 <div class="row">
-
-  <!-- <button (click)="testingService()">click me!</button> -->
-
-  <ul>
-    <li *ngFor="let role of roleService.roles | async">
-      {{ role.name }}
-    </li>
-    <li *ngFor="let office of officeService.offices | async">
-      {{ office.name }}
-    </li>
-    <li *ngFor="let equipment of equipmentService.equipment | async">
-      {{ equipment.name }}
-    </li>
-    <li *ngIf="foundRoleById | async as x; else null">
-      {{ x.name }}
-    </li>
-    <li *ngFor="let y of foundRoleByName | async">
-      {{ y.name }}
-    </li>
-  </ul>
-
-  <div *ngIf="auth.user$ | async as user; else login">
-    {{ user | json }}
-    <hr>
-    <button class="button" (click)="auth.signOut()">
-      Sign Out
-    </button>
+  <div class="col-md-12">
+    <app-dashboard-table 
+      [role]="roleService.roles"
+      [office]="officeService.offices"
+      [equipment]="equipmentService.equipment"
+    ></app-dashboard-table>
   </div>
-
-  <ng-template #login>
-    <button class="button" (click)="auth.googleSignIn()">
-      Login with Google
-    </button>
-  </ng-template>
-
-  <!-- <div class="col-md-9">
-    <app-sales-graph></app-sales-graph>
-  </div>
-  <div class="col-md-3">
-    <app-visit-graph></app-visit-graph>
-  </div>
-
-
-
-  <div class="col-md-6">
-    <app-project-of-month></app-project-of-month>
-  </div>
-  <div class="col-md-6">
-    <app-contacts></app-contacts>
-  </div>
-
-
-  <div class="col-md-4">
-    <app-cards></app-cards>
-  </div>
-
-  <div class="col-md-8">
-    <app-website-graph></app-website-graph>
-  </div> -->
 </div>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,78 @@
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">
+            <span class="lstick"></span>Equipments
+        </h4>
+        <div class="table-responsive">
+            <table class="table vm no-th-brd pro-of-month mb-0 v-middle">
+                <thead>
+                    <tr>
+                        <th class="mw-250">Name</th>
+                        <th class="mw-250">Purchase Date</th>
+                        <th class="mw-250">Purchase Order Number</th>
+                        <th class="mw-250">Office Assigned</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let eq of equipment | async ">
+                        <td>{{eq.name}}</td>
+                        <td>{{eq.purchase_date.toDate()  | date:'longDate'}}</td>
+                        <td>{{eq.id}}</td>
+                        <td>{{eq.office_name}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">
+            <span class="lstick"></span>Recent Online Users
+        </h4>
+        <div class="table-responsive">
+            <table class="table vm no-th-brd pro-of-month mb-0 v-middle">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Last Online</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let eq of equipment | async">
+                        <td>{{eq.name}}</td>
+                        <td>{{eq.purchase_date.toDate()  | date:'short'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">
+            <span class="lstick"></span>Action Logs
+        </h4>
+        <div class="table-responsive">
+            <table class="table vm no-th-brd pro-of-month mb-0 v-middle">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Timestamp</th>
+                        <th>Activity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let eq of equipment | async">
+                        <td>{{eq.name}}</td>
+                        <td>{{eq.purchase_date.toDate()  | date:'longDate'}}</td>
+                        <td>Kumaen</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

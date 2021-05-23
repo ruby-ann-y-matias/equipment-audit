@@ -9,7 +9,7 @@ import { VisitGraphComponent } from './dashboard-components/visit-graph/visit-gr
 import { WebsiteGraphComponent } from './dashboard-components/website-graph/website-graph.component';
 import { CardsComponent } from './dashboard-components/cards/cards.component';
 import { ContactsComponent } from './dashboard-components/contacts/contacts.component';
-import { ProjectOfMonthComponent } from './dashboard-components/project-of-month/project-of-month.component';
+import { DashboardTableComponent } from './dashboard-table/dashboard-table.component';
 
 const routes: Routes = [
   {
@@ -29,6 +29,6 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     ChartsModule,
   ],
-  declarations: [DashboardComponent, SalesGraphComponent, VisitGraphComponent, WebsiteGraphComponent, CardsComponent, ContactsComponent, ProjectOfMonthComponent],
+  declarations: [DashboardComponent, SalesGraphComponent, VisitGraphComponent, WebsiteGraphComponent, CardsComponent, ContactsComponent, DashboardTableComponent],
 })
 export class DashboardModule {}

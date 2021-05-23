@@ -1,1 +1,27 @@
-<p>equipments works!</p>
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">
+            <span class="lstick"></span>Equipments
+        </h4>
+        <div class="table-responsive">
+            <table class="table vm no-th-brd pro-of-month mb-0 v-middle">
+                <thead>
+                    <tr>
+                        <th class="mw-250">Name</th>
+                        <th class="mw-250">Purchase Date</th>
+                        <th class="mw-250">Purchase Order Number</th>
+                        <th class="mw-250">Office Assigned</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let eq of equipmentService.equipment | async ">
+                        <td>{{eq.name}}</td>
+                        <td>{{eq.purchase_date.toDate()  | date:'longDate'}}</td>
+                        <td>{{eq.id}}</td>
+                        <td>{{eq.office_name}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
