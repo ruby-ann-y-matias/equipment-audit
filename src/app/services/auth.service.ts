@@ -56,7 +56,7 @@ export class AuthService {
     const provider = new firebase.auth.GoogleAuthProvider();
     const credential = await this.afAuth.signInWithPopup(provider);
     // console.log(credential.user);
-    return this.updateUserData(credential.user);
+    return this.updateUserData(credential.user, 'google');
   }
 
   async signOut() {
@@ -64,18 +64,40 @@ export class AuthService {
     return this.router.navigate(['/']);
   }
 
-  private updateUserData({ uid, email, displayName, photoURL }: any) {
+  async signUp(email: string, password: string, rememberLogin: boolean) {
+    try {
+      const credential = await this.afAuth.createUserWithEmailAndPassword(email, password);
+      // console.log(credential.user);
+      if (rememberLogin) this.afAuth.setPersistence('local');
+      return this.updateUserData(credential.user, 'email');
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async signIn(email: string, password: string, rememberLogin: boolean) {
+    try {
+      const credential = await this.afAuth.signInWithEmailAndPassword(email, password);
+      // console.log(credential.user);
+      if (rememberLogin) this.afAuth.setPersistence('local');
+      return this.updateUserData(credential.user, 'email');
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  private updateUserData({ uid, email, displayName, photoURL }: any, registrationType: string) {
     if (this.regUserRole) {
       const data = {
         uid,
         email,
-        name: displayName,
-        profile_image: photoURL,
+        name: displayName = '',
+        profile_image: photoURL = '',
         role_name: this.regUserRole.name,
         role_ref: `/roles/${this.regUserRole.id}`
       };
 
-      this.userService.addOrUpdateUser(data);
+      this.userService.addOrUpdateUser(data, registrationType);
     }
   }
 }

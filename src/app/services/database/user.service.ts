@@ -33,24 +33,32 @@ export class UserService {
     this.users = this.usersCollection.valueChanges();
   }
 
-  addOrUpdateUser(user: User) {
+  addOrUpdateUser(user: User, registrationType: string) {
     const now = firebase.firestore.FieldValue.serverTimestamp();
 
     this.findUserByEmail(user.email).pipe(take(1))
       .subscribe((x: any) => {
         if (x.length === 0) {
-          console.log(111);
           this.addUser({...user, office_name: '', office_ref: ''});
         } else {
-          console.log(222);
           // TO-DO: CHECK ROLE SUBMITTED VS EXISTING ROLE LATER
-          this.updateUser(x[0].uid, {...x[0], ...user});
+           if (registrationType === 'email') {
+            // for non-SNS, retain db profile_image and name
+            this.updateUser(x[0].uid, {
+              ...x[0],
+              ...user,
+              name: x[0].name,
+              profile_image: x[0].profile_image
+            });
+          } else {
+            // otherwise, save latest profile_image and name from SNS
+            this.updateUser(x[0].uid, {...x[0], ...user});
+          }
         }
       });
   }
 
   addUser(user: User) {
-    // const newId = this.db.createId();
     const now = firebase.firestore.FieldValue.serverTimestamp();
 
     const validatedUser = {

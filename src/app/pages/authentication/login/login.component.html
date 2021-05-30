@@ -5,7 +5,7 @@
                 <div class="card-body ">
                     <h3 class="card-title text-center">Sign In</h3>
                     <div class="login-form-container">
-                        <form action="">
+                        <form action="" onsubmit="return false">
                             <div class="mb-3">
                                 <label for="username" class="form-label">Username</label>
                                 <input type="text" class="form-control " id="username">
@@ -20,10 +20,10 @@
                                     <label class="form-check-label" for="rememberLogin">Remember</label>
                                   </div>
                                   <div class="login-btn w-100 mt-3">
-                                      <button class="btn w-100 text-uppercase" type="submit">Login</button>
+                                      <button class="btn w-100 text-uppercase" type="submit" (click)="handleSignIn()">Login</button>
                                   </div>
                             </div>
-                        </form> 
+                        </form>
                         <div class="row text-center">
                             <div class="col-12">
                                 <p class="my-2 font-weight-bold">OR</p>
