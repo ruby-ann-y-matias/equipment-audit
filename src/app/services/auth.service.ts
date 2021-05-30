@@ -34,7 +34,7 @@ export class AuthService {
     this.roleService = roleService;
     this.regUserRole = null;
 
-    this.roleService.findRoleByName('test').pipe(take(1))
+    this.roleService.findRoleByName('regular').pipe(take(1))
       .subscribe((x: any) => this.getUserRole(x[0]));
 
     this.user$ = this.afAuth.authState.pipe(
