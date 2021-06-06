@@ -16,18 +16,23 @@
             <div class="equipment-details-container col-12 col-md-6">
                 <h5><strong>Specifications: </strong> </h5>
                 <p>{{equipmentDetails.specs}}</p>
-    
+
                 <h5><strong>Purchase Date: </strong> </h5>
                 <p>{{equipmentDetails.purchase_date.toDate()  | date:'longDate'}}</p>
-    
+
                 <h5><strong>Office Assigned: </strong> </h5>
                 <p>{{equipmentDetails.office_name}}</p>
-    
+
                 <h5><strong>Order Number: </strong> </h5>
                 <p>{{equipmentDetails.id}}</p>
 
                 <h5><strong>QR Code: </strong> </h5>
-                <p>{{equipmentDetails.id}}</p>
+                <ngx-qrcode
+                  [elementType]="elementType"
+                  [errorCorrectionLevel]="correctionLevel"
+                  [value]="value"
+                  cssClass="qr-class"
+                ></ngx-qrcode>
 
             </div>
             <div class="equipment-image-container col-12 col-md-6 text-right">

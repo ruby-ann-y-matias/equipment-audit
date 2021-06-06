@@ -8,10 +8,9 @@ import { EquipmentService } from 'src/app/services/database/equipment.service';
   styleUrls: ['./equipments.component.scss']
 })
 export class EquipmentsComponent implements OnInit {
-
   constructor(
     public equipmentService: EquipmentService,
-    public router : Router
+    public router: Router
     ) { }
 
   ngOnInit(): void {

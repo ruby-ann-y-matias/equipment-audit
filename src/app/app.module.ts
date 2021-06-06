@@ -10,6 +10,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { Routes, RouterModule } from '@angular/router';
+import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -66,6 +67,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     HttpClientModule,
 	  PerfectScrollbarModule,
     NgbModule,
+    NgxQRCodeModule,
     RouterModule.forRoot(Approutes, { useHash: false, relativeLinkResolution: 'legacy' })
   ],
   providers: [
