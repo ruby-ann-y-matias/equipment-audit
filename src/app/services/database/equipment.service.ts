@@ -10,6 +10,7 @@ export interface Equipment {
   specs: string,
   office_name: string, // the value of this should come from the office service
   office_ref: string, // the value of this should come from the office service
+  photo_url: string,
   purchase_date: any, // this should be in a format accepted by JS new Date()
   last_audited_at: any, // this should be in a format accepted by JS new Date()
   created_at: any,
