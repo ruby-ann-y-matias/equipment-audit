@@ -12,9 +12,6 @@ import { UsersComponent } from './pages/users/users.component';
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToDashboard = () => redirectLoggedInTo(['dashboard']);
 
-// const adminOnly = () => hasCustomClaim('admin');
-// const belongsToAccount = (next: any) => hasCustomClaim(`account-${next.params.id}`);
-
 export const Approutes: Routes = [
   {
     path: '',
