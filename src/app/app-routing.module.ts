@@ -9,8 +9,8 @@ import { EquipmentsComponent } from './pages/equipments/equipments.component';
 import { OfficeComponent } from './pages/office/office.component';
 import { UsersComponent } from './pages/users/users.component';
 
-const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
-const redirectLoggedInToDashboard = () => redirectLoggedInTo(['dashboard']);
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['/login']);
+const redirectLoggedInToDashboard = () => redirectLoggedInTo(['/dashboard']);
 
 export const Approutes: Routes = [
   {

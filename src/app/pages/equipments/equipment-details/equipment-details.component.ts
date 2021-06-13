@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { EquipmentService } from 'src/app/services/database/equipment.service';
+import { FileUploadService } from 'src/app/services/database/fileUpload.service';
 
 import {
   NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels
@@ -19,7 +20,8 @@ export class EquipmentDetailsComponent implements OnInit {
   equipmentDetails : any;
   constructor(
     private activatedRoute : ActivatedRoute,
-    private equipmentService: EquipmentService
+    private equipmentService: EquipmentService,
+    private fileUploadService: FileUploadService
   ) { }
 
   ngOnInit(): void {
@@ -34,9 +36,15 @@ export class EquipmentDetailsComponent implements OnInit {
     })
   }
 
+  handleInputFile() {
+    const inputFile = document.querySelector('#inputFile') as HTMLInputElement;
+    if (inputFile) inputFile.click();
+  }
 
-
-
-
-
+  handleUploadFile(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.fileUploadService.uploadFile(file, this.equipmentDetails, 'equipment');
+    }
+  }
 }

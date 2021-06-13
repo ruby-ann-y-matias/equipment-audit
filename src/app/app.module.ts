@@ -6,6 +6,7 @@ import {
   LocationStrategy,
   PathLocationStrategy
 } from '@angular/common';
+
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
@@ -30,7 +31,9 @@ import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule, BUCKET } from '@angular/fire/storage';
 import { environment } from '../environments/environment';
+
 import { PERSISTENCE } from '@angular/fire/auth';
 import { UsersComponent } from './pages/users/users.component';
 import { EquipmentsComponent } from './pages/equipments/equipments.component';
@@ -60,6 +63,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   imports: [
     AngularFirestoreModule,
     AngularFireModule.initializeApp(environment.firebase),
+    AngularFireStorageModule,
     CommonModule,
     BrowserModule,
     BrowserAnimationsModule,
@@ -82,6 +86,9 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     {
       provide: PERSISTENCE,
       useValue: 'session'
+    },
+    { provide: BUCKET,
+      useValue: 'gs://equipment-audit-d939d.appspot.com'
     }
   ],
   bootstrap: [AppComponent]

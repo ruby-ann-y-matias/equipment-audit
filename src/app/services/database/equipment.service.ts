@@ -8,11 +8,11 @@ export interface Equipment {
   id: string,
   name: string,
   specs: string,
-  office_name: string, // the value of this should come from the office service
-  office_ref: string, // the value of this should come from the office service
-  photo_url: string,
-  purchase_date: any, // this should be in a format accepted by JS new Date()
-  last_audited_at: any, // this should be in a format accepted by JS new Date()
+  office_name?: string, // the value of this should come from the office service
+  office_ref?: string, // the value of this should come from the office service
+  photo_url?: string,
+  purchase_date?: any, // this should be in a format accepted by JS new Date()
+  last_audited_at?: any, // this should be in a format accepted by JS new Date()
   created_at: any,
   updated_at: any
 }
@@ -68,32 +68,35 @@ export class EquipmentService {
   }
 
   updateEquipment(id: string, updates: Equipment) {
-    // if object is not found, will error, must catch
+    const now = firebase.firestore.FieldValue.serverTimestamp();
     const { purchase_date, last_audited_at } = updates;
 
-    if (!!Date.parse(purchase_date) && !!Date.parse(last_audited_at)) {
-      const now = firebase.firestore.FieldValue.serverTimestamp();
+    const validatedEquipment = {
+      ...updates,
+      id,
+      updated_at: now
+    };
+
+    if (!!Date.parse(purchase_date)) {
       const purchaseDate = firebase.firestore.Timestamp.fromDate(new Date(purchase_date));
-      const lastAuditedAt = firebase.firestore.Timestamp.fromDate(new Date(last_audited_at));
-
-      const validatedEquipment = {
-        ...updates,
-        id,
-        purchase_date: purchaseDate,
-        last_audited_at: lastAuditedAt,
-        updated_at: now
-      };
-
-      delete validatedEquipment.created_at;
-      // console.log(validatedEquipment);
-
-      this.equipmentCollection.doc(id).update(validatedEquipment)
-        .then(() => {
-          console.log('Updated');
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      validatedEquipment.purchase_date = purchaseDate;
     }
+
+    if (!!Date.parse(last_audited_at)) {
+      const lastAuditedAt = firebase.firestore.Timestamp.fromDate(new Date(last_audited_at));
+      validatedEquipment.last_audited_at = lastAuditedAt;
+    }
+
+    delete validatedEquipment.created_at;
+    // console.log(validatedEquipment);
+
+    // if object is not found, will error, must catch
+    this.equipmentCollection.doc(id).update(validatedEquipment)
+      .then(() => {
+        console.log('Updated');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 }

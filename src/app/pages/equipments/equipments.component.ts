@@ -16,9 +16,6 @@ export class EquipmentsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
-
-
   goToDetailedEquipmentPage(id: any){
     this.router.navigate(['/equipments/'+id]);
   }
