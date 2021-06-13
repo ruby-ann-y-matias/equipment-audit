@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AngularFireAuthGuard, hasCustomClaim, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/auth-guard';
 
 import { FullComponent } from './layouts/full/full.component';
 import { LoginComponent } from './pages/authentication/login/login.component';
@@ -7,6 +8,12 @@ import { EquipmentDetailsComponent } from './pages/equipments/equipment-details/
 import { EquipmentsComponent } from './pages/equipments/equipments.component';
 import { OfficeComponent } from './pages/office/office.component';
 import { UsersComponent } from './pages/users/users.component';
+
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
+const redirectLoggedInToDashboard = () => redirectLoggedInTo(['dashboard']);
+
+// const adminOnly = () => hasCustomClaim('admin');
+// const belongsToAccount = (next: any) => hasCustomClaim(`account-${next.params.id}`);
 
 export const Approutes: Routes = [
   {
@@ -16,7 +23,9 @@ export const Approutes: Routes = [
       { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
       {
         path: 'dashboard',
-        loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
+        loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule),
+        canActivate: [AngularFireAuthGuard],
+        data: { authGuardPipe: redirectUnauthorizedToLogin }
       },
       {
         path: 'component',
@@ -24,7 +33,9 @@ export const Approutes: Routes = [
       },
       {
         path: 'login' , pathMatch: 'full' ,
-        component: LoginComponent
+        component: LoginComponent,
+        canActivate: [AngularFireAuthGuard],
+        data: { authGuardPipe: redirectLoggedInToDashboard }
       },
       {
         path: 'logout' , pathMatch: 'full' ,
@@ -32,19 +43,27 @@ export const Approutes: Routes = [
       },
       {
         path: 'equipments' , pathMatch: 'full' ,
-        component: EquipmentsComponent
+        component: EquipmentsComponent,
+        canActivate: [AngularFireAuthGuard],
+        data: { authGuardPipe: redirectUnauthorizedToLogin }
       },
       {
         path: 'equipments/:id' , pathMatch: 'full' ,
-        component: EquipmentDetailsComponent
+        component: EquipmentDetailsComponent,
+        canActivate: [AngularFireAuthGuard],
+        data: { authGuardPipe: redirectUnauthorizedToLogin }
       },
       {
         path: 'offices' , pathMatch: 'full' ,
-        component: OfficeComponent
+        component: OfficeComponent,
+        canActivate: [AngularFireAuthGuard],
+        data: { authGuardPipe: redirectUnauthorizedToLogin }
       },
       {
         path: 'users' , pathMatch: 'full' ,
-        component: UsersComponent
+        component: UsersComponent,
+        canActivate: [AngularFireAuthGuard],
+        data: { authGuardPipe: redirectUnauthorizedToLogin }
       },
     ]
   },

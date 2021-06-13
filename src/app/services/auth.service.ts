@@ -56,7 +56,7 @@ export class AuthService {
     const provider = new firebase.auth.GoogleAuthProvider();
     const credential = await this.afAuth.signInWithPopup(provider);
     // console.log(credential.user);
-    return this.updateUserData(credential.user, 'google');
+    this.updateUserData(credential.user, 'google');
   }
 
   async signOut() {
@@ -69,7 +69,7 @@ export class AuthService {
       const credential = await this.afAuth.createUserWithEmailAndPassword(email, password);
       // console.log(credential.user);
       if (rememberLogin) this.afAuth.setPersistence('local');
-      return this.updateUserData(credential.user, 'email');
+      this.updateUserData(credential.user, 'email');
     } catch (e) {
       console.log(e);
     }
@@ -80,7 +80,7 @@ export class AuthService {
       const credential = await this.afAuth.signInWithEmailAndPassword(email, password);
       // console.log(credential.user);
       if (rememberLogin) this.afAuth.setPersistence('local');
-      return this.updateUserData(credential.user, 'email');
+      this.updateUserData(credential.user, 'email');
     } catch (e) {
       console.log(e);
     }
@@ -98,6 +98,7 @@ export class AuthService {
       };
 
       this.userService.addOrUpdateUser(data, registrationType);
+      return this.router.navigate(['/dashboard']);
     }
   }
 }

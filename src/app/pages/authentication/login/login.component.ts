@@ -38,6 +38,9 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (window.location.pathname === '/logout') {
+      this.auth.signOut();
+    }
   }
 
 }
