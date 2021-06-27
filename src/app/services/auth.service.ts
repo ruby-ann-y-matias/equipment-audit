@@ -86,7 +86,7 @@ export class AuthService {
     }
   }
 
-  private updateUserData({ uid, email, displayName, photoURL }: any, registrationType: string) {
+  async updateUserData({ uid, email, displayName, photoURL }: any, registrationType: string) {
     if (this.regUserRole) {
       const data = {
         uid,
@@ -99,7 +99,7 @@ export class AuthService {
         }
       };
 
-      this.userService.addOrUpdateUser(data, registrationType);
+      await this.userService.addOrUpdateUser(data, registrationType);
       return this.router.navigate(['/dashboard']);
     }
   }
