@@ -12,6 +12,6 @@ export class NavigationComponent {
   public showSearch = false;
 
   constructor(
-  	private auth: AuthService
+  	public auth: AuthService
   ) {}
 }
