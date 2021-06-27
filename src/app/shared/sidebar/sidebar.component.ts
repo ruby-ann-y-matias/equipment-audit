@@ -3,7 +3,7 @@ import { ROUTES } from './menu-items';
 import { RouteInfo } from './sidebar.metadata';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-//declare var $: any;
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -26,11 +26,19 @@ export class SidebarComponent implements OnInit {
   constructor(
     private modalService: NgbModal,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private auth: AuthService
   ) {}
 
   // End open close
   ngOnInit() {
-    this.sidebarnavItems = ROUTES.filter(sidebarnavItem => sidebarnavItem);
+    this.auth.user$.subscribe((res) => {
+      // console.log(res);
+      if (res !== null) {
+        this.sidebarnavItems = ROUTES.filter(sidebarnavItem => sidebarnavItem);
+      } else {
+        this.sidebarnavItems = ROUTES.filter(sidebarnavItem => sidebarnavItem.path !== '/logout');
+      }
+    });
   }
 }

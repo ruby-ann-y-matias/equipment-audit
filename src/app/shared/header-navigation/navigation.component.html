@@ -52,9 +52,10 @@
       data-toggle="dropdown"
       aria-haspopup="true"
       aria-expanded="false"
+      *ngIf="auth.user$ | async as user"
     >
       <img
-        src="assets/images/users/1.jpg"
+        src="{{ user.profile_image }}"
         alt="user"
         class="rounded-circle"
         width="31"

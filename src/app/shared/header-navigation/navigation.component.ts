@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-//declare var $: any;
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-navigation',
@@ -11,5 +11,7 @@ export class NavigationComponent {
 
   public showSearch = false;
 
-  constructor() {}
+  constructor(
+  	private auth: AuthService
+  ) {}
 }

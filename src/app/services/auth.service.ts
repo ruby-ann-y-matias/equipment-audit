@@ -92,9 +92,11 @@ export class AuthService {
         uid,
         email,
         name: displayName = '',
-        profile_image: photoURL = '',
         role_name: this.regUserRole.name,
-        role_ref: `/roles/${this.regUserRole.id}`
+        role_ref: `/roles/${this.regUserRole.id}`,
+        ...photoURL && {
+          profile_image: photoURL
+        }
       };
 
       this.userService.addOrUpdateUser(data, registrationType);
