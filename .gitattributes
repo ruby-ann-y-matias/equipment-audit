@@ -1,2 +1,4 @@
 *.scss linguist-detectable
 *.ts linguist-detectable
+*.html linguist-detectable=false
+*.htm  linguist-detectable=false
